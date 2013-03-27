@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -g -I. -c -lm
 LFLAGS = `sdl-config --cflags --libs`
-ARCHIVOS = Xander.o
+ARCHIVOS = xander.o
 
 
 %.out:$(ARCHIVOS)
@@ -9,7 +9,7 @@ ARCHIVOS = Xander.o
 	rm -r *.o
 
 Xander:
-	gcc Xander.c -o Xander.out $(LFLAGS)
+	g++ xander.cpp -o xander.out $(LFLAGS)
 
 clean:
 	rm -rf *.o *.out
