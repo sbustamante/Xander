@@ -42,10 +42,10 @@ int main()
 
 //Carga Imagenes
   PantallaOculta = SDL_CreateRGBSurface(SDL_SWSURFACE, 800, 600, 32, 0, 0, 0, 0);
-  Fondo = SDL_LoadBMP("./pictures/Grass.bmp");  
-  Xander = SDL_LoadBMP("./pictures/Xander.bmp");
-  Rock= SDL_LoadBMP("./pictures/Rock.bmp");
-  Tree= SDL_LoadBMP("./pictures/Tree.bmp");
+  Fondo = SDL_LoadBMP("./data/Grass.bmp");  
+  Xander = SDL_LoadBMP("./data/Xander.bmp");
+  Rock= SDL_LoadBMP("./data/Rock.bmp");
+  Tree= SDL_LoadBMP("./data/Tree.bmp");
   //Hace transparente la imagen
   SDL_SetColorKey(Xander, SDL_SRCCOLORKEY, SDL_MapRGB(Xander->format, 0, 255, 0));
   SDL_SetColorKey(Rock, SDL_SRCCOLORKEY, SDL_MapRGB(Xander->format, 0, 255, 0));
