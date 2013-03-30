@@ -1,0 +1,29 @@
+#Number		Zone Description
+#----------------------------------------------------------------------------------------
+1		Normal Land
+2		Green Grass
+3		Yellow Grass
+4		Rocky Land
+5		Snow
+6		Desert
+7		Black Land
+8		Flower Land
+9		Rocky Tile
+
+#Gradients are managed according to the next scheme
+#----------------------------------------------------------------------------------------
+#
+#	a	a	a	a	a
+#
+#	a	ab08	ab07	ab06	a
+#  
+#	a	ab01	b	ab05	a
+#
+#	a	ab02	ab03	ab04	a
+#
+#	a	a	a	a	a
+#
+# Where a is a certain type of zone and b other (these can't be 8 or 9 type)
+#
+# There is another type of regions that are a reverse state of the corner zones, these can 
+# be accesed with te modificator 1, that is, ab12 instead ab02 and so.
