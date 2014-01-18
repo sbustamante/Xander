@@ -77,10 +77,10 @@ class scenario:
 
 
 
-class main_character:
-    """main_character class
+class character:
+    """character
     
-    Class which contains all information related with the main character of the game
+    Class which contains all information related with a character object of the game
     
     """
     def __init__( self, screen, main_image, matrix, x=0, y=0 ):
@@ -116,16 +116,26 @@ class main_character:
 	    self.i += 1
 
     def draw( self ):
-	"""draw
-	
-	Function that draw the main character according given coordinates
-	
-	"""
 	self.main = pygame.image.load( self.main_image ).convert_alpha()
 	#Drawing main character
 	self.screen.blit( self.main, (self.x,self.y) )
 
 
+class main(character):
+    """main (character)
+    
+    Class which contains all information related with the main character of the game
+    
+    """
+    None
+  
+class enemy(character):
+    """enemy (character)
+    
+    Class which contains all information related with the enemy character of the game
+    
+    """
+    None
 
 #------------------------------------------------------------------------------
 #Program
@@ -135,7 +145,7 @@ class main_character:
 M = int(sys.argv[1])
 N = int(sys.argv[2])
 percent = float(sys.argv[3])
-delay = 30
+frames = float(sys.argv[4])
 
 #Pictures
 background_image = 'background.bmp'
@@ -145,6 +155,7 @@ enemy_image = 'enemy.bmp'
 
 #Pygame init
 pygame.init()
+clock = pygame.time.Clock()
 
 #Screen
 screen = pygame.display.set_mode( (20*M, 20*N), 0, 32 )
@@ -153,8 +164,8 @@ pygame.display.set_caption("IA test (Finding algorithm): by Sebastian Bustamante
 #Initializing scenario and characters
 scene = scenario( M, N, percent, screen, background_image, block_image )
 scene.random_scenario()
-xander = main_character( screen, main_image, scene.matrix )
-enemy = main_character( screen, enemy_image, scene.matrix )
+xander = main( screen, main_image, scene.matrix )
+enemy = enemy( screen, enemy_image, scene.matrix )
 
 
 while True:	    
@@ -168,22 +179,20 @@ while True:
     if pressed_keys[K_ESCAPE]:	sys.exit()
     #Up
     elif pressed_keys[K_UP]:
-	pygame.time.delay(delay)
 	xander.up()
     #Down
     elif pressed_keys[K_DOWN]:	
-      	pygame.time.delay(delay)
 	xander.down()
     #Left
     elif pressed_keys[K_LEFT]:	
-      	pygame.time.delay(delay)
 	xander.left()
     #Right
     elif pressed_keys[K_RIGHT]:	
-      	pygame.time.delay(delay)
 	xander.right()
+	
 	
     scene.build_scenario()
     xander.draw( )
     enemy.draw( )
+    msElapsed = clock.tick(frames)
     pygame.display.update()
