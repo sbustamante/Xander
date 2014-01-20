@@ -99,21 +99,29 @@ class character:
 	if self.j>0 and self.matrix[self.i,self.j-1] != 1 :
 	    self.y -= 20
 	    self.j -= 1
+	    return true
+	return false
 
     def down( self ):
 	if self.j+1<N and self.matrix[self.i,self.j+1] != 1 :
 	    self.y += 20
 	    self.j += 1
+	    return true
+	return false
 
     def left( self ):
       	if self.i>0 and self.matrix[self.i-1,self.j] != 1:
 	    self.x -= 20
 	    self.i -= 1
+	    return true
+	return false
 
     def right( self ):
       if self.i+1<M and self.matrix[self.i+1,self.j] != 1:
 	    self.x += 20
 	    self.i += 1
+	    return true
+	return false
 
     def draw( self ):
 	self.main = pygame.image.load( self.main_image ).convert_alpha()
