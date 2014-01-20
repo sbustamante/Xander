@@ -135,7 +135,12 @@ class enemy(character):
     Class which contains all information related with the enemy character of the game
     
     """
-    None
+    def searching( self ):
+	num = np.random.rand()
+	if num < 0.25: self.up()
+	elif 0.25 < num < 0.5: self.down()
+	elif 0.5 < num < 0.75: self.left()
+	elif 0.75 < num < 1.0: self.right()
 
 #------------------------------------------------------------------------------
 #Program
@@ -146,6 +151,7 @@ M = int(sys.argv[1])
 N = int(sys.argv[2])
 percent = float(sys.argv[3])
 frames = float(sys.argv[4])
+N_en = int(sys.argv[5])
 
 #Pictures
 background_image = 'background.bmp'
@@ -165,7 +171,10 @@ pygame.display.set_caption("IA test (Finding algorithm): by Sebastian Bustamante
 scene = scenario( M, N, percent, screen, background_image, block_image )
 scene.random_scenario()
 xander = main( screen, main_image, scene.matrix )
-enemy = enemy( screen, enemy_image, scene.matrix )
+
+enemies = []
+for i in xrange(N_en):
+    enemies.append( enemy( screen, enemy_image, scene.matrix, (M-1)*20, (N-1)*20 ) )
 
 
 while True:	    
@@ -190,9 +199,20 @@ while True:
     elif pressed_keys[K_RIGHT]:	
 	xander.right()
 	
-	
     scene.build_scenario()
+
+    for i in xrange(N_en):
+	enemies[i].searching()
+	enemies[i].draw( )
+	if enemies[i].i == xander.i and enemies[i].j == xander.j:
+	    myfont = pygame.font.SysFont("Comic Sans MS", 30)
+	    label = myfont.render("You have lost!", 1, (255,0,0) )
+	    screen.blit(label, (M*10-100, N*10-20))
+	    pygame.display.update()
+	    pygame.time.delay(1000)
+	    sys.exit()
+
     xander.draw( )
-    enemy.draw( )
+
     msElapsed = clock.tick(frames)
     pygame.display.update()
